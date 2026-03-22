@@ -1,28 +1,42 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { C } from "@/components/showcase/C";
+import SplashCursor from "./SplashCursor";
 
 export const DovHero = () => {
   const [visible, setVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 100);
-    return () => clearTimeout(t);
+    setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => { clearTimeout(t); window.removeEventListener('resize', handleResize); };
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#f0f4f8] to-white">
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#f0f4f8] to-white">
+      {/* SplashCursor - desktop only */}
+      {!isMobile && (
+        <C name="SplashCursor" file="src/components/sites/dovito/SplashCursor.tsx" prompt="WebGL fluid simulation cursor effect. Renders a full-screen canvas that creates colorful fluid splashes following mouse movement. Uses WebGL shaders for advection, divergence, curl, and pressure solving. Desktop only (hidden on mobile). Configure via props: SPLAT_RADIUS, SPLAT_FORCE, DENSITY_DISSIPATION, CURL, etc.">
+          <SplashCursor
+            BACK_COLOR={{ r: 0.94, g: 0.96, b: 0.97 }}
+            SPLAT_RADIUS={0.15}
+            DENSITY_DISSIPATION={3.5}
+            VELOCITY_DISSIPATION={2}
+            CURL={3}
+            activeAreaRef={heroRef as any}
+          />
+        </C>
+      )}
+
       {/* Subtle grid background */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: 'linear-gradient(#1a3a60 1px, transparent 1px), linear-gradient(90deg, #1a3a60 1px, transparent 1px)',
         backgroundSize: '60px 60px'
       }} />
-
-      {/* Splash cursor canvas placeholder */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-[#39a0ed]/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/3 w-80 h-80 bg-[#1a3a60]/8 rounded-full blur-[100px]" />
-      </div>
 
       <div className={`relative z-10 container mx-auto px-6 text-center max-w-4xl transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         <C name="HeroEyebrowBadge" file="src/components/sites/dovito/DovHero.tsx" prompt="Pill-shaped eyebrow badge with rounded-full, light navy/6 background, uppercase text-xs tracking-[0.15em], navy/60 color." inline={true}>
@@ -42,7 +56,7 @@ export const DovHero = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <C name="HeroPrimaryButton" file="src/components/sites/dovito/DovHero.tsx" prompt="Primary CTA button with navy bg, white text, rounded-xl, px-7 py-3.5, font-semibold, arrow icon that shifts right on hover." inline={true}>
+          <C name="HeroPrimaryButton" file="src/components/sites/dovito/DovHero.tsx" prompt="Primary CTA button with navy bg (#1a3a60), white text, rounded-xl, px-7 py-3.5, font-semibold, arrow icon that shifts right on hover." inline={true}>
           <button className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1a3a60] text-white font-semibold rounded-xl hover:bg-[#1a3a60]/90 transition-all group">
             Get Started
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -57,13 +71,13 @@ export const DovHero = () => {
       </div>
 
       {/* Scroll indicator */}
-      <C name="ScrollIndicator" file="src/components/sites/dovito/DovHero.tsx" prompt="Scroll indicator at bottom center: pill-shaped border container (w-6 h-10) with a small bouncing dot inside. Navy/20 border, navy/30 dot.">
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <div className="w-6 h-10 border-2 border-[#1a3a60]/20 rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-2 bg-[#1a3a60]/30 rounded-full animate-bounce" />
-        </div>
+        <C name="ScrollIndicator" file="src/components/sites/dovito/DovHero.tsx" prompt="Scroll indicator: pill-shaped border container (w-6 h-10) with a small bouncing dot inside. Navy/20 border, navy/30 dot.">
+          <div className="w-6 h-10 border-2 border-[#1a3a60]/20 rounded-full flex items-start justify-center p-2">
+            <div className="w-1 h-2 bg-[#1a3a60]/30 rounded-full animate-bounce" />
+          </div>
+        </C>
       </div>
-      </C>
     </section>
   );
 };
