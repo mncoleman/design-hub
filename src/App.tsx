@@ -38,7 +38,7 @@ const App = () => (
   <TooltipProvider>
     <ShowcaseProvider>
       <SiteSpecificEffects />
-      <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <BrowserRouter basename={import.meta.env.BASE_URL} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <ShowcaseToolbar />
         <div className="pt-11">
           <Routes>
