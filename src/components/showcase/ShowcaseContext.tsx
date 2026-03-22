@@ -14,9 +14,12 @@ export const SITES: SiteConfig[] = [
     description: "Dark theme with gold accents, animated SVGs, and GlassCube cards",
     color: "#F59E0B",
   },
-  // Future sites will be added here
-  // { id: "saas", name: "SaaS Platform", description: "...", color: "#3B82F6" },
-  // { id: "agency", name: "Creative Agency", description: "...", color: "#8B5CF6" },
+  {
+    id: "consulting",
+    name: "Operations Consulting",
+    description: "Light theme with navy accents, splash cursor, and app mockup",
+    color: "#1a3a60",
+  },
 ];
 
 interface ShowcaseContextType {
