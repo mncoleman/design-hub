@@ -339,3 +339,54 @@ body.figma-cursor-active * {
 .animate-pulse-ring {
   animation: pulse-ring 2s ease-in-out infinite;
 }
+
+/* Element-level component inspector */
+.showcase-element {
+  outline: 2px dashed transparent;
+  outline-offset: 2px;
+  transition: outline-color 0.15s ease;
+}
+.showcase-element:hover {
+  outline-color: rgba(245, 158, 11, 0.5);
+  z-index: 50;
+}
+.showcase-element:hover::after {
+  content: attr(data-c-name);
+  position: absolute;
+  top: -2px;
+  left: 4px;
+  transform: translateY(-100%);
+  background: rgba(7, 7, 10, 0.92);
+  color: #F59E0B;
+  font-size: 9px;
+  font-weight: 700;
+  font-family: 'Geist', monospace;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 51;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  letter-spacing: 0.03em;
+}
+
+/* Panel slide-in animation */
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-panel-in {
+  animation: panel-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Custom scrollbar for prompt area */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}

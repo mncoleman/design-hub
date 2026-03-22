@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import GlassCube from "@/components/ui/GlassCube";
+import { C } from "@/components/showcase/C";
 
 const steps = [
   {
@@ -39,10 +40,14 @@ export const ProcessSection = () => {
 
       <div className={`container mx-auto px-6 max-w-5xl transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
         <div className="text-center mb-20">
-          <span className="eyebrow block mb-4">HOW IT WORKS</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            How We Work
-          </h2>
+          <C name="ProcessEyebrow" file="src/components/home/ProcessSection.tsx" prompt="Uppercase tracking-wide muted gold eyebrow label centered above section heading. Uses .eyebrow utility class." inline={true}>
+            <span className="eyebrow block mb-4">HOW IT WORKS</span>
+          </C>
+          <C name="ProcessHeading" file="src/components/home/ProcessSection.tsx" prompt="Large bold white section heading, 4xl on mobile scaling to 5xl on md breakpoint. Centered with bottom margin.">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              How We Work
+            </h2>
+          </C>
           <p className="text-lg text-white/40 max-w-xl mx-auto">
             A streamlined process for reliable results
           </p>
@@ -50,20 +55,21 @@ export const ProcessSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {steps.map((step, i) => (
-            <GlassCube
-              key={step.number}
-              className="min-h-[240px]"
-              wobbleAngle={(i / 3) * Math.PI * 2}
-            >
-              <div
-                className={`p-8 flex flex-col h-full min-h-[240px] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-                style={{ transitionDelay: `${i * 150}ms` }}
+            <C key={step.number} name="GlassCubeCard" file="src/components/home/ProcessSection.tsx" prompt="GlassCube card with subtle 3D wobble effect. Contains a mono step number, bold title, and muted description. Fades in with staggered delay on viewport entry. Min height 240px.">
+              <GlassCube
+                className="min-h-[240px]"
+                wobbleAngle={(i / 3) * Math.PI * 2}
               >
-                <span className="text-sm font-mono text-primary/50 block mb-4">{step.number}</span>
-                <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
-                <p className="text-sm text-white/45 leading-relaxed">{step.description}</p>
-              </div>
-            </GlassCube>
+                <div
+                  className={`p-8 flex flex-col h-full min-h-[240px] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                  style={{ transitionDelay: `${i * 150}ms` }}
+                >
+                  <span className="text-sm font-mono text-primary/50 block mb-4">{step.number}</span>
+                  <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
+                  <p className="text-sm text-white/45 leading-relaxed">{step.description}</p>
+                </div>
+              </GlassCube>
+            </C>
           ))}
         </div>
       </div>
