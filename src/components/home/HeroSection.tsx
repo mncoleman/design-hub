@@ -128,17 +128,17 @@ export const HeroSection = () => {
       </div>
 
       {/* Scroll indicator */}
-      <C
-        name="ScrollIndicator"
-        file="src/components/home/HeroSection.tsx"
-        prompt="Scroll-down indicator anchored to the bottom center of the hero. A 6x10 rounded-full container with primary/30 border, containing a small 1x2 rounded dot in primary color that bounces infinitely via animate-bounce."
-      >
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+        <C
+          name="ScrollIndicator"
+          file="src/components/home/HeroSection.tsx"
+          prompt="Scroll-down indicator: A 6x10 rounded-full container with primary/30 border, containing a small 1x2 rounded dot in primary color that bounces infinitely via animate-bounce. Absolutely positioned at bottom center of hero."
+        >
           <div className="w-6 h-10 border-2 border-primary/30 rounded-full flex items-start justify-center p-2">
             <div className="w-1 h-2 bg-primary rounded-full animate-bounce" />
           </div>
-        </div>
-      </C>
+        </C>
+      </div>
     </section>
   );
 };
