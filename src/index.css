@@ -72,12 +72,18 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Only hide cursor on devices that support hover (desktop/mouse) */
+  /* Only hide cursor on drone site (dark theme) - controlled via body class */
   @media (hover: hover) and (pointer: fine) {
-    body {
+    body.custom-cursor-active {
       cursor: none;
     }
-    a, button, [role="button"], input, label, select, textarea {
+    body.custom-cursor-active a,
+    body.custom-cursor-active button,
+    body.custom-cursor-active [role="button"],
+    body.custom-cursor-active input,
+    body.custom-cursor-active label,
+    body.custom-cursor-active select,
+    body.custom-cursor-active textarea {
       cursor: none;
     }
   }
