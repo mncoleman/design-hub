@@ -18,40 +18,40 @@ export const DovProblem = () => {
   }, []);
 
   return (
-    <section ref={ref} className="px-6 py-20 md:py-28 bg-white">
-      <div className={`max-w-4xl mx-auto transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-        <C name="ProblemEyebrow" file="src/components/sites/dovito/DovProblem.tsx" prompt="Eyebrow label: text-xs font-medium, blue (#39a0ed) color, uppercase tracking-[0.15em], block display." inline={true}>
-        <span className="text-xs font-medium text-[#39a0ed] uppercase tracking-[0.15em] block mb-3">The Problem</span>
-        </C>
-        <C name="ProblemHeading" file="src/components/sites/dovito/DovProblem.tsx" prompt="Section h2 heading, text-3xl md:text-4xl, font-bold, navy color.">
-        <h2 className="text-3xl md:text-4xl font-bold text-[#1a3a60] mb-10">What Holds Businesses Back</h2>
-        </C>
+    <section ref={ref} className="px-4 sm:px-6 py-16 md:py-24 bg-[#f8f9fb]">
+      <div className={`max-w-5xl mx-auto transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+        <div className="text-center mb-12">
+          <C name="ProblemEyebrow" file="src/components/sites/dovito/DovProblem.tsx" prompt="Centered eyebrow: text-xs font-medium, navy/40 color, uppercase tracking-[0.15em]." inline={true}>
+          <span className="text-xs font-medium text-[#1a3a60]/40 uppercase tracking-[0.15em] block mb-4">The Problem</span>
+          </C>
+          <C name="ProblemHeading" file="src/components/sites/dovito/DovProblem.tsx" prompt="Section heading: text-3xl md:text-4xl lg:text-5xl, font-bold, navy color, centered.">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1a3a60] mb-4">What Holds Businesses Back</h2>
+          </C>
+        </div>
 
-        <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
           {problems.map((p, i) => (
             <C
               key={p.label}
               name="ProblemCard"
               file="src/components/sites/dovito/DovProblem.tsx"
-              prompt="Problem card row with left blue accent bar (w-1 h-12 rounded-full), bold label and muted description. Rounded-xl border with light gray bg, hover shadow and darker border."
+              prompt="Problem card: rounded-2xl, white bg, border, p-6 md:p-8. Top blue accent bar (h-1 w-12 rounded-full). Bold label + muted description. Hover elevates with shadow."
             >
             <div
-              className="flex items-start gap-4 p-6 rounded-xl border border-[#1a3a60]/[0.06] bg-[#f8f9fb] transition-all duration-500 hover:shadow-md hover:border-[#1a3a60]/[0.12]"
+              className={`p-6 md:p-8 rounded-2xl bg-white border border-[#1a3a60]/[0.06] transition-all duration-500 hover:shadow-lg hover:border-[#1a3a60]/[0.12] ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               style={{ transitionDelay: `${i * 100}ms` }}
             >
-              <C name="ProblemAccentBar" file="src/components/sites/dovito/DovProblem.tsx" prompt="Vertical blue accent bar: w-1 h-12 rounded-full bg-[#39a0ed], flex-shrink-0.">
-              <div className="w-1 h-12 rounded-full bg-[#39a0ed] flex-shrink-0 mt-1" />
+              <C name="ProblemAccentBar" file="src/components/sites/dovito/DovProblem.tsx" prompt="Horizontal blue accent bar: h-1 w-12 rounded-full bg-[#39a0ed], mb-5.">
+              <div className="h-1 w-12 rounded-full bg-[#39a0ed] mb-5" />
               </C>
-              <div>
-                <span className="font-bold text-[#1a3a60]">{p.label}</span>{" "}
-                <span className="text-[#1a3a60]/60">{p.description}</span>
-              </div>
+              <h3 className="font-bold text-lg text-[#1a3a60] mb-2">{p.label}</h3>
+              <p className="text-sm text-[#1a3a60]/50 leading-relaxed">{p.description}</p>
             </div>
             </C>
           ))}
         </div>
 
-        <p className="mt-8 text-lg text-[#1a3a60]/70 font-medium">
+        <p className="text-center text-lg text-[#1a3a60]/60 font-medium max-w-2xl mx-auto">
           We fix the workflow, measure the gain, and scale what works.
         </p>
       </div>
