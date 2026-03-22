@@ -320,3 +320,22 @@ body.figma-cursor-active [class*="z-[9999]"] {
 body.figma-cursor-active * {
   cursor: none !important;
 }
+
+/* Showcase toolbar - shine sweep animation */
+@keyframes shine-sweep {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.animate-shine {
+  animation: shine-sweep 3s ease-in-out infinite;
+}
+
+/* Pulse ring for active state */
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.3); }
+  50% { box-shadow: 0 0 0 4px rgba(245, 158, 11, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}
+.animate-pulse-ring {
+  animation: pulse-ring 2s ease-in-out infinite;
+}

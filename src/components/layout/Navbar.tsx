@@ -5,7 +5,7 @@ import type { StaggeredMenuItem } from "@/components/ui/StaggeredMenu";
 
 const navLinks = [
   { href: "/", label: "HOME" },
-  { href: "/about", label: "ABOUT US" },
+  { href: "/about", label: "ABOUT" },
   { href: "/contact", label: "CONTACT" },
 ];
 
@@ -48,7 +48,7 @@ export const Navbar = () => {
   const shouldAnimate = isScrolled && !isMobile;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-24 flex justify-center items-start">
+    <header className="fixed top-11 left-0 right-0 z-50 h-24 flex justify-center items-start">
       <div className={`relative top-4 w-[calc(100%-1.5rem)] max-w-7xl mx-auto transition-all duration-300 ease-in-out ${
         shouldAnimate ? 'h-12' : 'h-16'
       }`}>
@@ -58,13 +58,14 @@ export const Navbar = () => {
         }`} />
 
         <div className="relative flex items-center justify-between h-full px-4">
-          {/* Logo */}
+          {/* Logo placeholder */}
           <Link to="/" className="flex items-center space-x-2 z-10">
-            <img
-              src="https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68ed922e8c1d1065ae358ef7.png"
-              alt="LEVOAIR Logo"
-              className={`transition-all duration-300 ${shouldAnimate ? 'h-7' : 'h-8'} w-auto`}
-            />
+            <div className={`transition-all duration-300 flex items-center gap-2 ${shouldAnimate ? 'h-7' : 'h-8'}`}>
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/30 to-primary/10 border border-primary/20 flex items-center justify-center">
+                <span className="text-[10px] font-bold text-primary">YL</span>
+              </div>
+              <span className="text-sm font-semibold text-white/70 hidden sm:inline">Your Logo</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -86,7 +87,7 @@ export const Navbar = () => {
           <div className="flex items-center space-x-2 z-10">
             <div className="hidden md:block">
               <Link to="/contact" className="gradient-primary font-semibold text-sm whitespace-nowrap px-5 py-2.5 rounded-lg inline-flex items-center">
-                Hire a Pilot
+                Get Started
               </Link>
             </div>
           </div>
@@ -94,7 +95,7 @@ export const Navbar = () => {
       </div>
 
       {/* Mobile Staggered Menu */}
-      <div className="md:hidden fixed top-0 right-0 w-screen h-screen pointer-events-none z-[60]">
+      <div className="md:hidden fixed top-11 right-0 w-screen h-screen pointer-events-none z-[60]">
         <StaggeredMenu
           position="right"
           items={staggeredMenuItems}
