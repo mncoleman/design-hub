@@ -16,8 +16,22 @@ export const ComponentPanel = ({ name, file, fileUrl, prompt, meta, position, on
   const [copied, setCopied] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(prompt);
+  const handleCopy = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    try {
+      navigator.clipboard.writeText(prompt);
+    } catch {
+      // Fallback for non-HTTPS
+      const ta = document.createElement('textarea');
+      ta.value = prompt;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -114,10 +128,14 @@ export const ComponentPanel = ({ name, file, fileUrl, prompt, meta, position, on
       <div className="px-4 py-3 border-t border-white/[0.06] flex-shrink-0">
         <button
           onClick={handleCopy}
-          className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary/20 text-primary text-xs font-semibold hover:bg-primary/30 transition-colors"
+          className={`w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
+            copied
+              ? 'bg-emerald-500/20 text-emerald-400 scale-[0.98]'
+              : 'bg-primary/20 text-primary hover:bg-primary/30'
+          }`}
         >
           {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-          {copied ? "Copied to Clipboard" : "Copy AI Prompt"}
+          {copied ? "Copied to Clipboard!" : "Copy AI Prompt"}
         </button>
       </div>
     </div>,
