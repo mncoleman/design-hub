@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { FigmaCursors } from "@/components/home/FigmaCursors";
+import { C } from "@/components/showcase/C";
 import { Home, Users, Building2, FolderOpen, ClipboardList, GitBranch, BookOpen, MessageSquare, Settings, ChevronDown, Search, Bell } from "lucide-react";
 
 type Page = "home" | "projects" | "pipeline" | "learn";
@@ -37,8 +38,12 @@ export const DovAppMockup = () => {
     <section ref={ref} className="px-6 py-20 md:py-28 bg-[#f8f9fb]">
       <div className={`max-w-6xl mx-auto transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         <div className="text-center mb-12">
+          <C name="MockupEyebrow" file="src/components/sites/dovito/DovAppMockup.tsx" prompt="Eyebrow label: text-xs font-medium, blue (#39a0ed) color, uppercase tracking-[0.15em], block display." inline={true}>
           <span className="text-xs font-medium text-[#39a0ed] uppercase tracking-[0.15em] block mb-3">Platform Preview</span>
+          </C>
+          <C name="MockupHeading" file="src/components/sites/dovito/DovAppMockup.tsx" prompt="Section h2 heading, text-3xl md:text-4xl, font-bold, navy color.">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1a3a60] mb-4">Your Client Portal</h2>
+          </C>
           <p className="text-lg text-[#1a3a60]/50 max-w-2xl mx-auto">
             AI resources, project management, and operational tools. All in one place.
           </p>
@@ -48,8 +53,10 @@ export const DovAppMockup = () => {
           <FigmaCursors name="You" color="#2563EB" />
 
           {/* Browser chrome */}
+          <C name="AppMockupFrame" file="src/components/sites/dovito/DovAppMockup.tsx" prompt="Browser window frame: rounded-xl, border, light warm-gray bg (#FAFAF9), shadow-2xl. Contains title bar with traffic light dots and URL bar, then sidebar + main content layout.">
           <div className="rounded-xl overflow-hidden border border-[#1a3a60]/[0.1] bg-[#FAFAF9] shadow-2xl shadow-black/10">
             {/* Title bar */}
+            <C name="MockupTitleBar" file="src/components/sites/dovito/DovAppMockup.tsx" prompt="Browser title bar with traffic light dots (red/yellow/green circles w-3 h-3), centered URL bar with search icon and mono text showing current page path.">
             <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[#e5e5e5] bg-[#f5f5f4]">
               <div className="flex gap-1.5">
                 <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
@@ -63,9 +70,11 @@ export const DovAppMockup = () => {
                 </div>
               </div>
             </div>
+            </C>
 
             <div className="flex min-h-[450px]">
-              {/* Sidebar - matching Systematics design */}
+              {/* Sidebar */}
+              <C name="MockupSidebar" file="src/components/sites/dovito/DovAppMockup.tsx" prompt="App sidebar: w-52, border-right, warm-gray bg, flex-col. Contains logo, business selector dropdown, Home button, EXTERNAL nav section, INTERNAL nav section, and user avatar at bottom.">
               <div className="w-52 border-r border-[#e8e8e8] bg-[#FAFAF9] flex-shrink-0 hidden md:flex flex-col">
                 {/* Logo */}
                 <div className="px-4 py-4 border-b border-[#e8e8e8]">
@@ -152,6 +161,7 @@ export const DovAppMockup = () => {
                   </div>
                 </div>
               </div>
+              </C>
 
               {/* Main content area */}
               <div className="flex-1 flex flex-col">
@@ -182,14 +192,17 @@ export const DovAppMockup = () => {
                           { label: "Active Projects", value: "9", color: "text-green-600" },
                           { label: "Total Projects", value: "12", color: "text-[#1A1A1A]" },
                         ].map(s => (
-                          <div key={s.label} className="p-4 rounded-xl border border-[#e8e8e8] bg-white text-center">
+                          <C key={s.label} name="MockupStatCard" file="src/components/sites/dovito/DovAppMockup.tsx" prompt="Dashboard stat card: p-4 rounded-xl, border, white bg, centered large number (text-2xl font-bold with dynamic color) and small label below.">
+                          <div className="p-4 rounded-xl border border-[#e8e8e8] bg-white text-center">
                             <div className={`text-2xl font-bold ${s.color}`}>{s.value}</div>
                             <div className="text-[9px] text-[#5C5650] mt-1">{s.label}</div>
                           </div>
+                          </C>
                         ))}
                       </div>
                       {/* Pipeline snapshot + Recent projects */}
                       <div className="grid grid-cols-2 gap-3">
+                        <C name="MockupPipelineSnapshot" file="src/components/sites/dovito/DovAppMockup.tsx" prompt="Pipeline snapshot card: p-4 rounded-xl border white bg. Header with GitBranch icon and title. List of pipeline stages with counts in small gray badges.">
                         <div className="p-4 rounded-xl border border-[#e8e8e8] bg-white">
                           <div className="flex items-center gap-2 mb-3">
                             <GitBranch className="h-4 w-4 text-[#5C5650]" />
@@ -202,6 +215,8 @@ export const DovAppMockup = () => {
                             </div>
                           ))}
                         </div>
+                        </C>
+                        <C name="MockupRecentProjects" file="src/components/sites/dovito/DovAppMockup.tsx" prompt="Recent projects card: p-4 rounded-xl border white bg. Header with FolderOpen icon and title. List of projects with name, client, and colored status badge.">
                         <div className="p-4 rounded-xl border border-[#e8e8e8] bg-white">
                           <div className="flex items-center gap-2 mb-3">
                             <FolderOpen className="h-4 w-4 text-[#5C5650]" />
@@ -225,6 +240,7 @@ export const DovAppMockup = () => {
                             </div>
                           ))}
                         </div>
+                        </C>
                       </div>
                     </div>
                   )}
@@ -237,7 +253,9 @@ export const DovAppMockup = () => {
                           <h3 className="text-xl font-bold text-[#1A1A1A]">Projects</h3>
                           <p className="text-xs text-[#5C5650]">Manage all client projects.</p>
                         </div>
+                        <C name="MockupNewProjectButton" file="src/components/sites/dovito/DovAppMockup.tsx" prompt="Small dark button '+ New Project': text-[10px], px-3 py-1.5, black bg, white text, rounded-lg." inline={true}>
                         <button className="text-[10px] px-3 py-1.5 bg-[#1A1A1A] text-white rounded-lg font-medium">+ New Project</button>
+                        </C>
                       </div>
                       {/* Filter pills */}
                       <div className="flex items-center gap-2">
@@ -250,6 +268,7 @@ export const DovAppMockup = () => {
                         ))}
                       </div>
                       {/* Table */}
+                      <C name="MockupProjectTable" file="src/components/sites/dovito/DovAppMockup.tsx" prompt="Data table: rounded-xl border, white bg, overflow-hidden. Header row with 5 columns (Project, Client, Status, Started, Description) on gray bg. Body rows with project data and colored status badges.">
                       <div className="rounded-xl border border-[#e8e8e8] bg-white overflow-hidden">
                         <div className="grid grid-cols-5 gap-0 px-4 py-2 bg-[#FAFAF9] border-b border-[#e8e8e8] text-[9px] font-medium text-[#999]">
                           <span>Project</span><span>Client</span><span>Status</span><span>Started</span><span>Description</span>
@@ -260,7 +279,8 @@ export const DovAppMockup = () => {
                           { name: "Material Reporting", client: "Client B", status: "Completed", date: "3/17/2026", desc: "" },
                           { name: "CRM Integration", client: "Client B", status: "In Progress", date: "2/16/2026", desc: "" },
                         ].map(p => (
-                          <div key={p.name} className="grid grid-cols-5 gap-0 px-4 py-3 border-b border-[#f5f5f4] last:border-0 text-[10px]">
+                          <C key={p.name} name="MockupProjectRow" file="src/components/sites/dovito/DovAppMockup.tsx" prompt="Project table row: 5-column grid, px-4 py-3, bottom border. Shows project name (bold), client, colored status badge, date, and truncated description.">
+                          <div className="grid grid-cols-5 gap-0 px-4 py-3 border-b border-[#f5f5f4] last:border-0 text-[10px]">
                             <span className="font-medium text-[#1A1A1A]">{p.name}</span>
                             <span className="text-[#5C5650]">{p.client}</span>
                             <span><span className={`px-1.5 py-0.5 rounded text-[9px] font-medium ${
@@ -271,8 +291,10 @@ export const DovAppMockup = () => {
                             <span className="text-[#999]">{p.date}</span>
                             <span className="text-[#999] truncate">{p.desc}</span>
                           </div>
+                          </C>
                         ))}
                       </div>
+                      </C>
                     </div>
                   )}
 
@@ -304,7 +326,8 @@ export const DovAppMockup = () => {
                           { stage: "Approved", count: 2, color: "bg-green-50 text-green-700 border-green-300", items: [{ name: "Client A", person: "You", date: "3/16" }, { name: "Client B", person: "You", date: "3/9" }] },
                           { stage: "Active", count: 0, color: "bg-emerald-50 text-emerald-700 border-emerald-300", items: [] },
                         ].map(col => (
-                          <div key={col.stage}>
+                          <C key={col.stage} name="MockupKanbanColumn" file="src/components/sites/dovito/DovAppMockup.tsx" prompt="Kanban column: colored header bar with stage name and count, white body with border and min-height. Contains draggable cards or dashed empty-state placeholder.">
+                          <div>
                             <div className={`text-[9px] font-semibold ${col.color} border px-2 py-1.5 rounded-t-lg flex items-center justify-between`}>
                               {col.stage}
                               <span className="opacity-60">{col.count}</span>
@@ -314,14 +337,17 @@ export const DovAppMockup = () => {
                                 <div className="h-16 border-2 border-dashed border-[#e8e8e8] rounded-lg flex items-center justify-center text-[8px] text-[#ccc]">Drop here</div>
                               )}
                               {col.items.map(item => (
-                                <div key={item.name} className="p-2.5 rounded-lg border border-[#e8e8e8] bg-[#FAFAF9] text-[9px]">
+                                <C key={item.name} name="MockupKanbanCard" file="src/components/sites/dovito/DovAppMockup.tsx" prompt="Kanban card: p-2.5 rounded-lg border, light gray bg, text-[9px]. Shows company name (bold), person, and date.">
+                                <div className="p-2.5 rounded-lg border border-[#e8e8e8] bg-[#FAFAF9] text-[9px]">
                                   <div className="font-semibold text-[#1A1A1A]">{item.name}</div>
                                   <div className="text-[#999]">{item.person}</div>
                                   <div className="text-[#ccc]">{item.date}</div>
                                 </div>
+                                </C>
                               ))}
                             </div>
                           </div>
+                          </C>
                         ))}
                       </div>
                     </div>
@@ -348,11 +374,13 @@ export const DovAppMockup = () => {
                           { name: "Canva AI", cat: "Design", desc: "AI-assisted graphic design" },
                           { name: "Zapier", cat: "Automation", desc: "Connect apps and automate workflows" },
                         ].map(tool => (
-                          <div key={tool.name} className="p-3 rounded-xl border border-[#e8e8e8] bg-white hover:border-[#2563EB]/30 transition-colors">
+                          <C key={tool.name} name="MockupToolCard" file="src/components/sites/dovito/DovAppMockup.tsx" prompt="Tool resource card: p-3 rounded-xl border white bg, hover blue border accent. Shows tool name (xs semibold), category (blue text), and description (gray).">
+                          <div className="p-3 rounded-xl border border-[#e8e8e8] bg-white hover:border-[#2563EB]/30 transition-colors">
                             <div className="text-xs font-semibold text-[#1A1A1A]">{tool.name}</div>
                             <div className="text-[9px] text-[#2563EB] font-medium">{tool.cat}</div>
                             <div className="text-[9px] text-[#999] mt-1">{tool.desc}</div>
                           </div>
+                          </C>
                         ))}
                       </div>
                     </div>
@@ -361,6 +389,7 @@ export const DovAppMockup = () => {
               </div>
             </div>
           </div>
+          </C>
 
           {/* Glow */}
           <div className="absolute -inset-4 rounded-2xl bg-gradient-to-b from-[#2563EB]/[0.03] to-transparent -z-10 blur-xl" />
