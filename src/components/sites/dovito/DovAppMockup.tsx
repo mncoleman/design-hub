@@ -3,7 +3,7 @@ import { FigmaCursors } from "@/components/home/FigmaCursors";
 import { C } from "@/components/showcase/C";
 import { Home, Users, Building2, FolderOpen, ClipboardList, GitBranch, BookOpen, MessageSquare, Settings, ChevronDown, Search, Bell } from "lucide-react";
 
-type Page = "home" | "projects" | "pipeline" | "learn";
+type Page = "home" | "people" | "companies" | "projects" | "tasks" | "pipeline" | "learn" | "messages";
 
 const sidebarExternal = [
   { key: "people" as const, label: "People", icon: Users },
@@ -15,12 +15,12 @@ const sidebarExternal = [
 ];
 
 const sidebarInternal = [
-  { label: "Business Profile", icon: Building2 },
-  { label: "Messages", icon: MessageSquare },
-  { label: "Feedback", icon: MessageSquare },
-  { label: "Permissions", icon: Settings },
-  { label: "Timecards", icon: ClipboardList },
-  { label: "Payments", icon: Settings },
+  { key: "messages" as const, label: "Messages", icon: MessageSquare },
+  { key: "" as const, label: "Business Profile", icon: Building2 },
+  { key: "" as const, label: "Feedback", icon: MessageSquare },
+  { key: "" as const, label: "Permissions", icon: Settings },
+  { key: "" as const, label: "Timecards", icon: ClipboardList },
+  { key: "" as const, label: "Payments", icon: Settings },
 ];
 
 export const DovAppMockup = () => {
@@ -119,9 +119,7 @@ export const DovAppMockup = () => {
                     return (
                       <button
                         key={item.label}
-                        onClick={() => {
-                          if (["projects", "pipeline", "learn"].includes(item.key)) setActivePage(item.key as Page);
-                        }}
+                        onClick={() => setActivePage(item.key as Page)}
                         className={`w-full flex items-center gap-2 px-3 py-1.5 rounded-md text-xs transition-all ${
                           isActive ? 'bg-[#1A1A1A]/[0.06] font-medium text-[#1A1A1A]' : 'text-[#5C5650] hover:bg-[#1A1A1A]/[0.03]'
                         }`}
@@ -141,7 +139,19 @@ export const DovAppMockup = () => {
                   </div>
                   {sidebarInternal.slice(0, 4).map(item => {
                     const Icon = item.icon;
-                    return (
+                    const isActive = item.key && activePage === item.key;
+                    return item.key ? (
+                      <button
+                        key={item.label}
+                        onClick={() => setActivePage(item.key as Page)}
+                        className={`w-full flex items-center gap-2 px-3 py-1.5 rounded-md text-xs transition-all ${
+                          isActive ? 'bg-[#1A1A1A]/[0.06] font-medium text-[#1A1A1A]' : 'text-[#5C5650] hover:bg-[#1A1A1A]/[0.03]'
+                        }`}
+                      >
+                        <Icon className="h-3.5 w-3.5" />
+                        {item.label}
+                      </button>
+                    ) : (
                       <div key={item.label} className="flex items-center gap-2 px-3 py-1.5 text-xs text-[#5C5650]/60">
                         <Icon className="h-3.5 w-3.5" />
                         {item.label}
@@ -349,6 +359,140 @@ export const DovAppMockup = () => {
                           </div>
                           </C>
                         ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* PEOPLE */}
+                  {activePage === "people" && (
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div><h3 className="text-xl font-bold text-[#1A1A1A]">People</h3><p className="text-xs text-[#5C5650]">Manage contacts and team members.</p></div>
+                        <button className="text-[10px] px-3 py-1.5 bg-[#1A1A1A] text-white rounded-lg font-medium">+ Add Person</button>
+                      </div>
+                      <div className="rounded-xl border border-[#e8e8e8] bg-white overflow-hidden">
+                        <div className="grid grid-cols-4 gap-0 px-4 py-2 bg-[#FAFAF9] border-b border-[#e8e8e8] text-[9px] font-medium text-[#999]">
+                          <span>Name</span><span>Email</span><span>Role</span><span>Company</span>
+                        </div>
+                        {[
+                          { name: "Jane Doe", email: "jane@acme.com", role: "Client", company: "Acme Corp" },
+                          { name: "Tom Smith", email: "tom@buildright.com", role: "Client", company: "BuildRight" },
+                          { name: "Sarah Kim", email: "sarah@vertex.io", role: "Client", company: "Vertex Fiber" },
+                          { name: "Alex Chen", email: "alex@team.com", role: "Team", company: "Your Company" },
+                        ].map(p => (
+                          <div key={p.name} className="grid grid-cols-4 gap-0 px-4 py-3 border-b border-[#f5f5f4] last:border-0 text-[10px]">
+                            <span className="font-medium text-[#1A1A1A]">{p.name}</span>
+                            <span className="text-[#5C5650]">{p.email}</span>
+                            <span><span className={`px-1.5 py-0.5 rounded text-[9px] font-medium ${p.role === 'Team' ? 'bg-purple-50 text-purple-700 border border-purple-200' : 'bg-blue-50 text-blue-700 border border-blue-200'}`}>{p.role}</span></span>
+                            <span className="text-[#999]">{p.company}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* COMPANIES */}
+                  {activePage === "companies" && (
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div><h3 className="text-xl font-bold text-[#1A1A1A]">Companies</h3><p className="text-xs text-[#5C5650]">Client organizations.</p></div>
+                        <button className="text-[10px] px-3 py-1.5 bg-[#1A1A1A] text-white rounded-lg font-medium">+ Add Company</button>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {[
+                          { name: "Acme Corp", industry: "Construction", projects: 3, status: "Active" },
+                          { name: "BuildRight", industry: "General Contractor", projects: 1, status: "Active" },
+                          { name: "Vertex Fiber", industry: "Telecom", projects: 2, status: "Active" },
+                          { name: "ProBuild Inc", industry: "Specialty Contractor", projects: 0, status: "Prospect" },
+                        ].map(c => (
+                          <div key={c.name} className="p-4 rounded-xl border border-[#e8e8e8] bg-white">
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-xs font-semibold text-[#1A1A1A]">{c.name}</span>
+                              <span className={`text-[8px] px-1.5 py-0.5 rounded font-medium ${c.status === 'Active' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-gray-50 text-gray-600 border border-gray-200'}`}>{c.status}</span>
+                            </div>
+                            <div className="text-[9px] text-[#5C5650]">{c.industry}</div>
+                            <div className="text-[9px] text-[#999] mt-1">{c.projects} project{c.projects !== 1 ? 's' : ''}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* TASKS */}
+                  {activePage === "tasks" && (
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div><h3 className="text-xl font-bold text-[#1A1A1A]">Tasks</h3><p className="text-xs text-[#5C5650]">Track work across all projects.</p></div>
+                        <button className="text-[10px] px-3 py-1.5 bg-[#1A1A1A] text-white rounded-lg font-medium">+ New Task</button>
+                      </div>
+                      <div className="flex gap-2 mb-2">
+                        {["All", "To Do", "In Progress", "Done"].map((f, i) => (
+                          <button key={f} className={`px-3 py-1.5 rounded-full text-[10px] font-medium ${i === 0 ? 'bg-[#1A1A1A] text-white' : 'text-[#5C5650] border border-[#e8e8e8]'}`}>{f}</button>
+                        ))}
+                      </div>
+                      <div className="space-y-2">
+                        {[
+                          { title: "Review CRM integration spec", project: "CRM Integration", status: "In Progress", assignee: "AC", priority: "High" },
+                          { title: "Configure API endpoints", project: "Operations Platform", status: "To Do", assignee: "YN", priority: "Medium" },
+                          { title: "Write onboarding docs", project: "Company Website", status: "Done", assignee: "AC", priority: "Low" },
+                          { title: "Test payment webhook", project: "CRM Integration", status: "In Progress", assignee: "YN", priority: "High" },
+                          { title: "Deploy staging environment", project: "Operations Platform", status: "To Do", assignee: "AC", priority: "Medium" },
+                        ].map(t => (
+                          <div key={t.title} className="flex items-center justify-between p-3 rounded-xl border border-[#e8e8e8] bg-white">
+                            <div className="flex items-center gap-3">
+                              <div className={`w-2 h-2 rounded-full ${t.status === 'Done' ? 'bg-green-400' : t.status === 'In Progress' ? 'bg-blue-400' : 'bg-gray-300'}`} />
+                              <div>
+                                <div className="text-[10px] font-medium text-[#1A1A1A]">{t.title}</div>
+                                <div className="text-[8px] text-[#999]">{t.project}</div>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className={`text-[8px] px-1.5 py-0.5 rounded font-medium ${t.priority === 'High' ? 'bg-red-50 text-red-600' : t.priority === 'Medium' ? 'bg-amber-50 text-amber-600' : 'bg-gray-50 text-gray-500'}`}>{t.priority}</span>
+                              <div className="w-5 h-5 rounded-full bg-[#e8e8e8] flex items-center justify-center text-[7px] font-bold text-[#5C5650]">{t.assignee}</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* MESSAGES */}
+                  {activePage === "messages" && (
+                    <div className="space-y-4">
+                      <div><h3 className="text-xl font-bold text-[#1A1A1A]">Messages</h3><p className="text-xs text-[#5C5650]">Team and client conversations.</p></div>
+                      <div className="flex gap-3">
+                        {/* Thread list */}
+                        <div className="w-1/3 space-y-1.5">
+                          {[
+                            { name: "Acme Corp", preview: "Sounds good, let's proceed...", time: "2m", unread: true },
+                            { name: "BuildRight", preview: "When can we schedule the...", time: "1h", unread: false },
+                            { name: "Vertex Fiber", preview: "The spec looks great. One...", time: "3h", unread: false },
+                            { name: "Internal Team", preview: "Sprint planning tomorrow at...", time: "5h", unread: true },
+                          ].map(t => (
+                            <div key={t.name} className={`p-3 rounded-lg border ${t.unread ? 'border-[#2563EB]/20 bg-[#2563EB]/[0.02]' : 'border-[#e8e8e8] bg-white'} cursor-pointer`}>
+                              <div className="flex items-center justify-between mb-0.5">
+                                <span className={`text-[10px] font-semibold ${t.unread ? 'text-[#1A1A1A]' : 'text-[#5C5650]'}`}>{t.name}</span>
+                                <span className="text-[8px] text-[#999]">{t.time}</span>
+                              </div>
+                              <p className="text-[9px] text-[#999] truncate">{t.preview}</p>
+                            </div>
+                          ))}
+                        </div>
+                        {/* Chat area */}
+                        <div className="flex-1 rounded-xl border border-[#e8e8e8] bg-white p-4 flex flex-col">
+                          <div className="border-b border-[#f5f5f4] pb-2 mb-3">
+                            <span className="text-xs font-semibold text-[#1A1A1A]">Acme Corp</span>
+                          </div>
+                          <div className="flex-1 space-y-3 mb-3">
+                            <div className="flex gap-2"><div className="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center text-[7px] font-bold text-blue-600">JD</div><div className="p-2 rounded-lg bg-[#f5f5f4] text-[9px] text-[#1A1A1A] max-w-[70%]">The assessment report looks thorough. Can we schedule the review?</div></div>
+                            <div className="flex gap-2 justify-end"><div className="p-2 rounded-lg bg-[#2563EB] text-[9px] text-white max-w-[70%]">Absolutely. I have Thursday at 2pm or Friday at 10am open.</div><div className="w-5 h-5 rounded-full bg-[#e8e8e8] flex items-center justify-center text-[7px] font-bold text-[#5C5650]">YN</div></div>
+                            <div className="flex gap-2"><div className="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center text-[7px] font-bold text-blue-600">JD</div><div className="p-2 rounded-lg bg-[#f5f5f4] text-[9px] text-[#1A1A1A] max-w-[70%]">Sounds good, let's proceed with Thursday.</div></div>
+                          </div>
+                          <div className="flex gap-2">
+                            <div className="flex-1 px-3 py-2 rounded-lg border border-[#e8e8e8] text-[9px] text-[#999]">Type a message...</div>
+                            <button className="px-3 py-2 bg-[#2563EB] text-white rounded-lg text-[9px] font-medium">Send</button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   )}
