@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import { C } from "@/components/showcase/C";
 
 export const Footer = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -24,12 +25,14 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div className="space-y-3">
-            <Link to="/" className="inline-flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/30 to-primary/10 border border-primary/20 flex items-center justify-center">
-                <span className="text-[10px] font-bold text-primary">YL</span>
-              </div>
-              <span className="text-sm font-semibold text-white/70">Your Logo</span>
-            </Link>
+            <C name="FooterLogo" file="src/components/layout/Footer.tsx" prompt="Footer logo placeholder with gradient icon (from-primary/30 to-primary/10), border-primary/20, centered initials, and label text.">
+              <Link to="/" className="inline-flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/30 to-primary/10 border border-primary/20 flex items-center justify-center">
+                  <span className="text-[10px] font-bold text-primary">YL</span>
+                </div>
+                <span className="text-sm font-semibold text-white/70">Your Logo</span>
+              </Link>
+            </C>
             <p className="text-sm text-muted-foreground">
               Your company tagline goes here
             </p>
@@ -64,40 +67,42 @@ export const Footer = () => {
       </div>
 
       {/* Large logo text with cursor spotlight reveal */}
-      <div className="w-full overflow-hidden pt-8 pb-6 px-4 md:px-8">
-        <div
-          ref={logoRef}
-          className={`transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-          }`}
-        >
+      <C name="SpotlightLogoReveal" file="src/components/layout/Footer.tsx" prompt="Large text 'YOUR LOGO' at low opacity (0.03) that reveals at higher opacity (0.15) via a radial gradient mask that follows the mouse cursor. Uses maskImage/WebkitMaskImage with radial-gradient circle. Fades in on scroll via IntersectionObserver.">
+        <div className="w-full overflow-hidden pt-8 pb-6 px-4 md:px-8">
           <div
-            ref={logoContainerRef}
-            className="relative max-w-[1400px] mx-auto flex items-center justify-center py-12"
-            onMouseMove={(e) => {
-              const rect = logoContainerRef.current?.getBoundingClientRect();
-              if (!rect) return;
-              setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-            }}
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
+            ref={logoRef}
+            className={`transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+            }`}
           >
-            <span className="text-[6rem] md:text-[10rem] font-bold text-white/[0.03] select-none leading-none tracking-tight">
-              YOUR LOGO
-            </span>
-            <span
-              className="absolute text-[6rem] md:text-[10rem] font-bold text-white/[0.15] select-none leading-none tracking-tight transition-opacity duration-300"
-              style={{
-                opacity: isHovering ? 1 : 0,
-                maskImage: `radial-gradient(circle 200px at ${mousePos.x}px ${mousePos.y}px, black 30%, transparent 100%)`,
-                WebkitMaskImage: `radial-gradient(circle 200px at ${mousePos.x}px ${mousePos.y}px, black 30%, transparent 100%)`,
+            <div
+              ref={logoContainerRef}
+              className="relative max-w-[1400px] mx-auto flex items-center justify-center py-12"
+              onMouseMove={(e) => {
+                const rect = logoContainerRef.current?.getBoundingClientRect();
+                if (!rect) return;
+                setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
               }}
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
             >
-              YOUR LOGO
-            </span>
+              <span className="text-[6rem] md:text-[10rem] font-bold text-white/[0.03] select-none leading-none tracking-tight">
+                YOUR LOGO
+              </span>
+              <span
+                className="absolute text-[6rem] md:text-[10rem] font-bold text-white/[0.15] select-none leading-none tracking-tight transition-opacity duration-300"
+                style={{
+                  opacity: isHovering ? 1 : 0,
+                  maskImage: `radial-gradient(circle 200px at ${mousePos.x}px ${mousePos.y}px, black 30%, transparent 100%)`,
+                  WebkitMaskImage: `radial-gradient(circle 200px at ${mousePos.x}px ${mousePos.y}px, black 30%, transparent 100%)`,
+                }}
+              >
+                YOUR LOGO
+              </span>
+            </div>
           </div>
         </div>
-      </div>
+      </C>
     </footer>
   );
 };

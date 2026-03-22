@@ -19,8 +19,8 @@ export const FigmaCursors = ({ name = "You", color = "#F59E0B" }: Props) => {
     // Spring physics for the pill
     const spring = 0.08;
     const damping = 0.75;
-    const targetX = cursorPos.current.x + 20;
-    const targetY = cursorPos.current.y + 20;
+    const targetX = cursorPos.current.x + 16;
+    const targetY = cursorPos.current.y + 16;
 
     const dx = targetX - pillPos.current.x;
     const dy = targetY - pillPos.current.y;
@@ -59,7 +59,7 @@ export const FigmaCursors = ({ name = "You", color = "#F59E0B" }: Props) => {
       setIsHovering(true);
       document.body.classList.add("figma-cursor-active");
       // Initialize pill position to cursor
-      pillPos.current = { x: cursorPos.current.x + 20, y: cursorPos.current.y + 20 };
+      pillPos.current = { x: cursorPos.current.x + 16, y: cursorPos.current.y + 16 };
       pillVel.current = { x: 0, y: 0 };
       rafRef.current = requestAnimationFrame(animate);
     };
@@ -90,9 +90,9 @@ export const FigmaCursors = ({ name = "You", color = "#F59E0B" }: Props) => {
         <>
           {/* Cursor arrow - follows immediately */}
           <div ref={cursorEl} className="absolute pointer-events-none z-30" style={{ top: 0, left: 0 }}>
-            <svg width="20" height="24" viewBox="0 0 20 24" fill="none" className="drop-shadow-lg">
+            <svg width="16" height="18" viewBox="0 0 16 18" fill="none" className="drop-shadow-lg">
               <path
-                d="M1.5 1L1.5 18L6 13.5L11.5 22.5L15 20.5L9.5 12L16.5 12L1.5 1Z"
+                d="M1 1L1 13.5L4.5 10L8.5 16.5L11 15L7 9L12.5 9L1 1Z"
                 fill={color}
                 stroke="white"
                 strokeWidth="1.2"

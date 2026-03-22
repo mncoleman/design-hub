@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Plane, Building2, Map, Cpu } from "lucide-react";
+import { Plane, Building2, Map, Cpu, ArrowRight } from "lucide-react";
+import { C } from "@/components/showcase/C";
 
 const useCases = [
   {
@@ -276,56 +277,61 @@ export const UseCasesSection = () => {
       <div className={`container mx-auto px-6 max-w-6xl transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
         <div className="text-center mb-16">
           <span className="eyebrow block mb-4">USE CASES</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white">What We Do For You</h2>
+          <C name="UseCasesSectionHeading" file="src/components/home/UseCasesSection.tsx" prompt="Bold white heading 'What We Do For You' centered, text-4xl on mobile scaling to text-5xl on md breakpoint">
+            <h2 className="text-4xl md:text-5xl font-bold text-white">What We Do For You</h2>
+          </C>
         </div>
 
         {/* Tab buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
-          {useCases.map((uc, i) => (
-            <button
-              key={uc.id}
-              onClick={() => setActive(i)}
-              className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                active === i
-                  ? 'bg-white/[0.08] text-white border border-white/[0.12]'
-                  : 'text-white/40 border border-transparent hover:text-white/60'
-              }`}
-            >
-              {uc.label}
-            </button>
-          ))}
-        </div>
+        <C name="UseCasesTabButtons" file="src/components/home/UseCasesSection.tsx" prompt="Horizontally centered flex-wrap row of pill-shaped tab buttons with rounded-xl corners; active tab has subtle white bg and border, inactive tabs are dimmed white text with transparent border and hover state">
+          <div className="flex flex-wrap justify-center gap-3 mb-16">
+            {useCases.map((uc, i) => (
+              <button
+                key={uc.id}
+                onClick={() => setActive(i)}
+                className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                  active === i
+                    ? 'bg-white/[0.08] text-white border border-white/[0.12]'
+                    : 'text-white/40 border border-transparent hover:text-white/60'
+                }`}
+              >
+                {uc.label}
+              </button>
+            ))}
+          </div>
+        </C>
 
         {/* Active content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h3 className="text-3xl md:text-4xl font-bold text-white">{useCases[active].title}</h3>
             <p className="text-lg text-white/50 leading-relaxed">{useCases[active].description}</p>
-            <a href="/contact" className="btn-primary inline-flex group">
-              Get Started
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
+            <C name="UseCasesGetStartedButton" file="src/components/home/UseCasesSection.tsx" prompt="Primary CTA button linking to /contact with 'Get Started' text and a right arrow icon that translates right on hover; uses btn-primary class with inline-flex and group hover animation">
+              <a href="/contact" className="btn-primary inline-flex group">
+                Get Started
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </a>
+            </C>
           </div>
 
           {/* Custom SVG illustration */}
           <div className="flex items-center justify-center">
-            <div className="relative w-full max-w-sm aspect-square">
-              <div className="absolute inset-0 rounded-3xl border border-white/[0.06] bg-white/[0.01] overflow-hidden">
-                {(() => {
-                  const SvgComponent = svgComponents[useCases[active].id];
-                  return SvgComponent ? <SvgComponent color={useCases[active].svgColor} /> : null;
-                })()}
+            <C name="AnimatedUseCaseSVG" file="src/components/home/UseCasesSection.tsx" prompt="Square container with max-w-sm holding an animated SVG illustration that changes per active tab; has a rounded border card with subtle background and a blurred radial gradient glow behind it using the active use case color">
+              <div className="relative w-full max-w-sm aspect-square">
+                <div className="absolute inset-0 rounded-3xl border border-white/[0.06] bg-white/[0.01] overflow-hidden">
+                  {(() => {
+                    const SvgComponent = svgComponents[useCases[active].id];
+                    return SvgComponent ? <SvgComponent color={useCases[active].svgColor} /> : null;
+                  })()}
+                </div>
+                <div className="absolute -inset-8 rounded-3xl -z-10 blur-2xl" style={{
+                  background: `radial-gradient(circle at center, ${useCases[active].svgColor}10, transparent 60%)`
+                }} />
               </div>
-              <div className="absolute -inset-8 rounded-3xl -z-10 blur-2xl" style={{
-                background: `radial-gradient(circle at center, ${useCases[active].svgColor}10, transparent 60%)`
-              }} />
-            </div>
+            </C>
           </div>
         </div>
       </div>
     </section>
   );
 };
-
-// Need this import for the arrow
-import { ArrowRight } from "lucide-react";
