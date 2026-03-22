@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Linkedin } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 export const Footer = () => {
@@ -25,40 +24,24 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div className="space-y-3">
-            <Link to="/" className="inline-block">
-              <img
-                src="https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68ed922e8c1d1065ae358ef7.png"
-                alt="LEVOAIR Logo"
-                className="h-7 w-auto"
-              />
+            <Link to="/" className="inline-flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/30 to-primary/10 border border-primary/20 flex items-center justify-center">
+                <span className="text-[10px] font-bold text-primary">YL</span>
+              </div>
+              <span className="text-sm font-semibold text-white/70">Your Logo</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              Contract drone pilots for the industry
+              Your company tagline goes here
             </p>
-            <div className="flex space-x-3 pt-1">
-              <a
-                href="https://www.linkedin.com/company/levoair/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Linkedin className="h-4 w-4" />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
+              <li><Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About</Link></li>
               <li><Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact</Link></li>
-              <li><Link to="/brand-kit" className="text-sm text-muted-foreground hover:text-primary transition-colors">Brand Kit</Link></li>
-              <li>
-                <a href="https://levoair.instatus.com/" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  System Status
-                </a>
-              </li>
+              <li><Link to="/portfolio" className="text-sm text-muted-foreground hover:text-primary transition-colors">Portfolio</Link></li>
             </ul>
           </div>
 
@@ -66,21 +49,21 @@ export const Footer = () => {
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground mb-4">Contact</h3>
             <ul className="space-y-2">
-              <li><a href="mailto:info@levoair.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">info@levoair.com</a></li>
+              <li><span className="text-sm text-muted-foreground">hello@yourcompany.com</span></li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-border mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-muted-foreground gap-4">
-          <p>&copy; {new Date().getFullYear()} LevoAir. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Your Company. All rights reserved.</p>
           <div className="flex gap-4">
-            <Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
+            <span className="text-white/20">Privacy Policy</span>
+            <span className="text-white/20">Terms of Service</span>
           </div>
         </div>
       </div>
 
-      {/* Large logo fade-in with cursor spotlight reveal */}
+      {/* Large logo text with cursor spotlight reveal */}
       <div className="w-full overflow-hidden pt-8 pb-6 px-4 md:px-8">
         <div
           ref={logoRef}
@@ -90,7 +73,7 @@ export const Footer = () => {
         >
           <div
             ref={logoContainerRef}
-            className="relative max-w-[1400px] mx-auto"
+            className="relative max-w-[1400px] mx-auto flex items-center justify-center py-12"
             onMouseMove={(e) => {
               const rect = logoContainerRef.current?.getBoundingClientRect();
               if (!rect) return;
@@ -99,22 +82,19 @@ export const Footer = () => {
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
           >
-            <img
-              src="https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68ed922e8c1d1065ae358ef7.png"
-              alt="LEVOAIR"
-              className="w-full h-auto filter grayscale opacity-20"
-            />
-            <img
-              src="https://storage.googleapis.com/msgsndr/7uhnbFFpRMtL0wOChwmZ/media/68ed922e8c1d1065ae358ef7.png"
-              alt=""
-              aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-contain"
+            <span className="text-[6rem] md:text-[10rem] font-bold text-white/[0.03] select-none leading-none tracking-tight">
+              YOUR LOGO
+            </span>
+            <span
+              className="absolute text-[6rem] md:text-[10rem] font-bold text-white/[0.15] select-none leading-none tracking-tight transition-opacity duration-300"
               style={{
                 opacity: isHovering ? 1 : 0,
-                maskImage: `radial-gradient(circle 180px at ${mousePos.x}px ${mousePos.y}px, black 30%, transparent 100%)`,
-                WebkitMaskImage: `radial-gradient(circle 180px at ${mousePos.x}px ${mousePos.y}px, black 30%, transparent 100%)`,
+                maskImage: `radial-gradient(circle 200px at ${mousePos.x}px ${mousePos.y}px, black 30%, transparent 100%)`,
+                WebkitMaskImage: `radial-gradient(circle 200px at ${mousePos.x}px ${mousePos.y}px, black 30%, transparent 100%)`,
               }}
-            />
+            >
+              YOUR LOGO
+            </span>
           </div>
         </div>
       </div>
